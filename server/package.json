@@ -1,0 +1,21 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon"
+  },
+  "keywords": [],
+  "dependencies": {
+    "express": "*",
+    "pg": "7.4.3",
+    "redis": "*",
+    "cors": "*",
+    "body-parser": "*",
+    "nodemon": "*"
+  },
+  "author": "",
+  "license": "ISC"
+}

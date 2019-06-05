@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t xmastree/react-test -f ./client/dev.Dockerfile ./client
+
+script:
+  - docker run -e CI=true xmastree/react-test npm run test -- --coverage --watchAll=false
+
+after_success:
+  - docker build -t xmastree/multi-client ./client
+  - docker build -t xmastree/multi-nginx ./nginx
+  - docker build -t xmastree/multi-server ./server
+  - docker build -t xmastree/multi-worker ./worker
+  # log in to docker cli
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # take those images and push them to docker hub
+  - docker push xmastree/multi-client
+  - docker push xmastree/multi-nginx
+  - docker push xmastree/multi-server
+  - docker push xmastree/multi-worker

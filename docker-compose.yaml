@@ -5,7 +5,7 @@ services:
     restart: always
     build:
       dockerfile: dev.Dockerfile
-      context: ./nginx
+      context: ./nginx #build can be specified either as a string containing a path to the build context
     ports:
       - "3050:80"
 
